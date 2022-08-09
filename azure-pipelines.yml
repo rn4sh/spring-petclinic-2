@@ -11,7 +11,7 @@ pool:
 
 steps:
 - task: Maven@3
-  displayName: maven package
+  displayName: Package App
   inputs:
     mavenPomFile: 'pom.xml'
     mavenOptions: '-Xmx3072m'
@@ -25,7 +25,7 @@ steps:
   displayName: list directory contents.
   inputs:
     script: |
-      echo "Listing current dir and contents"
+      echo "Listing current dir contents"
       pwd
       ls -la
       echo "Target dir contents:"
@@ -36,22 +36,12 @@ steps:
       ls -la "$(Build.Repository.LocalPath)"
 
 - task: oc-cmd@2
-  displayName: Build
+  displayName: Deploy to OpenShift
   inputs:
     openshiftService: 'ocp-aro'
     cmd: 'oc start-build spring-petclinic-2 --from-file="$(Build.Repository.LocalPath)"/target/app.jar -n aro-ws --follow'
 - task: oc-cmd@2
-  displayName: Tag DEV
+  displayName: Tag image
   inputs:
     openshiftService: 'ocp-aro'
     cmd: 'oc tag spring-petclinic-2:latest spring-petclinic-2:dev -n aro-ws'
-- task: oc-cmd@2
-  displayName: Rollout to DEV
-  inputs:
-    openshiftService: 'ocp-aro'
-    cmd: 'oc rollout latest spring-petclinic-2 -n aro-ws'
-- task: oc-cmd@2
-  displayName: Rollout DEV status
-  inputs:
-    openshiftService: 'ocp-aro'
-    cmd: 'oc rollout status spring-petclinic-2 -n aro-ws'
