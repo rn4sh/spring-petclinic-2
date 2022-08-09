@@ -34,38 +34,39 @@ steps:
       echo "Staging dir: $(Build.StagingDirectory)"
       echo "Pipeline dir: $(Pipeline.Workspace)"
       ls -la "$(Build.Repository.LocalPath)"
+
 - task: oc-cmd@2
   displayName: oc - start s2i build
   inputs:
     openshiftService: 'ocp-aro'
-    cmd: 'oc start-build petclinic-s2i-build --from-file="$(Build.Repository.LocalPath)"/target/app.jar -n cicd --follow'
+    cmd: 'oc start-build spring-petclinic-2 --from-file="$(Build.Repository.LocalPath)"/target/app.jar -n ocp-aro --follow'
 - task: oc-cmd@2
   displayName: oc - tag DEV
   inputs:
     openshiftService: 'ocp-aro'
-    cmd: 'oc tag petclinic:latest petclinic:dev -n cicd'
+    cmd: 'oc tag petclinic:latest petclinic:dev -n ocp-aro'
 - task: oc-cmd@2
   displayName: oc - rollout to DEV
   inputs:
     openshiftService: 'ocp-aro'
-    cmd: 'oc rollout latest dc/petclinic -n petclinic-dev'
+    cmd: 'oc rollout latest dc/petclinic -n ocp-aro'
 - task: oc-cmd@2
   displayName: oc - rollout to DEV status
   inputs:
     openshiftService: 'ocp-aro'
-    cmd: 'oc rollout status dc/petclinic -n petclinic-dev'
+    cmd: 'oc rollout status dc/petclinic -n ocp-aro'
 - task: oc-cmd@2
   displayName: oc - tag UAT
   inputs:
     openshiftService: 'ocp-aro'
-    cmd: 'oc tag petclinic:dev petclinic:uat -n cicd'
+    cmd: 'oc tag petclinic:dev petclinic:uat -n ocp-aro'
 - task: oc-cmd@2
   displayName: oc - rollout to UAT
   inputs:
     openshiftService: 'ocp-aro'
-    cmd: 'oc rollout latest dc/petclinic -n petclinic-uat'
+    cmd: 'oc rollout latest dc/petclinic -n ocp-aro'
 - task: oc-cmd@2
   displayName: oc - rollout to UAT status
   inputs:
     openshiftService: 'ocp-aro'
-    cmd: 'oc rollout status dc/petclinic -n petclinic-uat'
+    cmd: 'oc rollout status dc/petclinic -n ocp-aro'
