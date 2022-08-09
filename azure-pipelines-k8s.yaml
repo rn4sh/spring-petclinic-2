@@ -18,6 +18,15 @@ steps:
       ls -la "$(Build.Repository.LocalPath)"
       
 - task: KubernetesManifest@0
+  displayName: Create Database
+  inputs:
+    action: deploy
+    kubernetesServiceConnection: 'openshift-aro-generic'
+    namespace: 'aro-ws'
+    manifests: |
+      $(Pipeline.Workspace)/s/resources/db.yaml
+
+- task: KubernetesManifest@0
   displayName: Create Deployment
   inputs:
     action: deploy
@@ -36,10 +45,11 @@ steps:
       $(Pipeline.Workspace)/s/resources/service.yaml
 
 - task: KubernetesManifest@0
-  displayName: Create DB
+  displayName: Create Route
   inputs:
     action: deploy
     kubernetesServiceConnection: 'openshift-aro-generic'
     namespace: 'aro-ws'
     manifests: |
-      $(Pipeline.Workspace)/s/resources/db.yaml
+      $(Pipeline.Workspace)/s/resources/route.yaml
+      
