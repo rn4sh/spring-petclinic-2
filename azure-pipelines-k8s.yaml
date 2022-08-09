@@ -24,5 +24,5 @@ steps:
     kubernetesServiceConnection: 'openshift-aro-generic'
     namespace: 'aro-ws'
     manifests: |
-      $(Pipeline.Workspace)/resources/deployment.yaml
-      $(Pipeline.Workspace)/resources/service.yaml
+      $(Pipeline.Workspace)/s/resources/deployment.yaml
+      $(Pipeline.Workspace)/s/resources/service.yaml
