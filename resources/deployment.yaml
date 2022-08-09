@@ -1,0 +1,28 @@
+# tag::app-deployment[]
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spring-petclinic
+  labels:
+    app: spring-petclinic
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: spring-petclinic
+  template:
+    metadata:
+      labels:
+        app: spring-petclinic
+    spec:
+      containers:
+        - name: app
+          image: quay.io/service-binding/spring-petclinic:latest
+          imagePullPolicy: Always
+          env:
+          - name: SPRING_PROFILES_ACTIVE
+            value: postgres
+          ports:
+          - name: http
+            containerPort: 8080
+# end::app-deployment[]
