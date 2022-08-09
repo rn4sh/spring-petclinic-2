@@ -44,29 +44,29 @@ steps:
   displayName: oc - tag DEV
   inputs:
     openshiftService: 'ocp-aro'
-    cmd: 'oc tag petclinic:latest petclinic:dev -n aro-ws'
+    cmd: 'oc tag spring-petclinic:latest spring-petclinic:dev -n aro-ws'
 - task: oc-cmd@2
   displayName: oc - rollout to DEV
   inputs:
     openshiftService: 'ocp-aro'
-    cmd: 'oc rollout latest dc/petclinic -n aro-ws'
+    cmd: 'oc rollout latest spring-petclinic -n aro-ws'
 - task: oc-cmd@2
   displayName: oc - rollout to DEV status
   inputs:
     openshiftService: 'ocp-aro'
-    cmd: 'oc rollout status dc/petclinic -n aro-ws'
+    cmd: 'oc rollout status spring-petclinic -n aro-ws'
 - task: oc-cmd@2
   displayName: oc - tag UAT
   inputs:
     openshiftService: 'ocp-aro'
-    cmd: 'oc tag petclinic:dev petclinic:uat -n aro-ws'
+    cmd: 'oc tag spring-petclinic:dev spring-petclinic:uat -n aro-ws'
 - task: oc-cmd@2
   displayName: oc - rollout to UAT
   inputs:
     openshiftService: 'ocp-aro'
-    cmd: 'oc rollout latest dc/petclinic -n aro-ws'
+    cmd: 'oc rollout latest spring-petclinic -n aro-ws'
 - task: oc-cmd@2
   displayName: oc - rollout to UAT status
   inputs:
     openshiftService: 'ocp-aro'
-    cmd: 'oc rollout status dc/petclinic -n aro-ws'
+    cmd: 'oc rollout status spring-petclinic -n aro-ws'
