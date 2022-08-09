@@ -17,11 +17,9 @@ spec:
     spec:
       containers:
         - name: app
-          image: quay.io/service-binding/spring-petclinic:latest
+          image: quay.io/redhat-github-actions/petclinic
           imagePullPolicy: Always
           env:
-          - name: SPRING_PROFILES_ACTIVE
-            value: postgres
           ports:
           - name: http
             containerPort: 8080
