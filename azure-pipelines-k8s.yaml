@@ -2,6 +2,21 @@ trigger:
     - main
 
 steps:
+
+- task: CmdLine@2
+  displayName: List directory contents
+  inputs:
+    script: |
+      echo "Listing current dir contents"
+      pwd
+      ls -la
+      echo "Target dir contents:"
+      echo "Artifact Staging dir: $(Build.ArtifactStagingDirectory)"
+      echo "Local dir: $(Build.Repository.LocalPath)"
+      echo "Staging dir: $(Build.StagingDirectory)"
+      echo "Pipeline dir: $(Pipeline.Workspace)"
+      ls -la "$(Build.Repository.LocalPath)"
+      
 - task: KubernetesManifest@0
   displayName: Deploy to Kubernetes cluster
   inputs:
