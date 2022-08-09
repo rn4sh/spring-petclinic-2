@@ -6,7 +6,7 @@ steps:
   displayName: Deploy to Kubernetes cluster
   inputs:
     action: deploy
-    kubernetesServiceConnection: 'openshift-aro'
+    kubernetesServiceConnection: 'openshift-aro-generic'
     namespace: 'aro-ws'
     manifests: |
       $(Pipeline.Workspace)/resources/deployment.yml
