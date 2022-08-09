@@ -36,37 +36,22 @@ steps:
       ls -la "$(Build.Repository.LocalPath)"
 
 - task: oc-cmd@2
-  displayName: oc - start s2i build
+  displayName: Build
   inputs:
     openshiftService: 'ocp-aro'
-    cmd: 'oc start-build spring-petclinic --from-file="$(Build.Repository.LocalPath)"/target/app.jar -n aro-ws --follow'
+    cmd: 'oc start-build spring-petclinic-2 --from-file="$(Build.Repository.LocalPath)"/target/app.jar -n aro-ws --follow'
 - task: oc-cmd@2
-  displayName: oc - tag DEV
+  displayName: Tag DEV
   inputs:
     openshiftService: 'ocp-aro'
-    cmd: 'oc tag spring-petclinic:latest spring-petclinic:dev -n aro-ws'
+    cmd: 'oc tag spring-petclinic-2:latest spring-petclinic-2:dev -n aro-ws'
 - task: oc-cmd@2
-  displayName: oc - rollout to DEV
+  displayName: Rollout to DEV
   inputs:
     openshiftService: 'ocp-aro'
-    cmd: 'oc rollout latest spring-petclinic -n aro-ws'
+    cmd: 'oc rollout latest spring-petclinic-2 -n aro-ws'
 - task: oc-cmd@2
-  displayName: oc - rollout to DEV status
+  displayName: Rollout DEV status
   inputs:
     openshiftService: 'ocp-aro'
-    cmd: 'oc rollout status spring-petclinic -n aro-ws'
-- task: oc-cmd@2
-  displayName: oc - tag UAT
-  inputs:
-    openshiftService: 'ocp-aro'
-    cmd: 'oc tag spring-petclinic:dev spring-petclinic:uat -n aro-ws'
-- task: oc-cmd@2
-  displayName: oc - rollout to UAT
-  inputs:
-    openshiftService: 'ocp-aro'
-    cmd: 'oc rollout latest spring-petclinic -n aro-ws'
-- task: oc-cmd@2
-  displayName: oc - rollout to UAT status
-  inputs:
-    openshiftService: 'ocp-aro'
-    cmd: 'oc rollout status spring-petclinic -n aro-ws'
+    cmd: 'oc rollout status spring-petclinic-2 -n aro-ws'
