@@ -22,7 +22,7 @@ steps:
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     goals: 'package'
 - task: CmdLine@2
-  displayName: list directory contents.
+  displayName: List directory contents
   inputs:
     script: |
       echo "Listing current dir contents"
