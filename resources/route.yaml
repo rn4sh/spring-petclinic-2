@@ -1,0 +1,14 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: spring-petclinic
+  namespace: aro-ws
+spec:
+  host: spring-petclinic-aro-ws.apps.u7i15zy1.canadacentral.aroapp.io
+  to:
+    kind: Service
+    name: spring-petclinic
+    weight: 100
+  port:
+    targetPort: 8080
+  wildcardPolicy: None
