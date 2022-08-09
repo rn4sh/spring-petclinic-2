@@ -1,5 +1,5 @@
 trigger:
-    - master
+    - main
 
 steps:
 - task: KubernetesManifest@0
@@ -9,5 +9,5 @@ steps:
     kubernetesServiceConnection: 'openshift-aro-generic'
     namespace: 'aro-ws'
     manifests: |
-      $(Pipeline.Workspace)/resources/deployment.yml
-      $(Pipeline.Workspace)/resources/service.yml
+      $(Pipeline.Workspace)/resources/deployment.yaml
+      $(Pipeline.Workspace)/resources/service.yaml
