@@ -39,7 +39,7 @@ steps:
   displayName: oc - start s2i build
   inputs:
     openshiftService: 'ocp-aro'
-    cmd: 'oc start-build spring-petclinic-2 --from-file="$(Build.Repository.LocalPath)"/target/app.jar -n aro-ws --follow'
+    cmd: 'oc start-build spring-petclinic --from-file="$(Build.Repository.LocalPath)"/target/app.jar -n aro-ws --follow'
 - task: oc-cmd@2
   displayName: oc - tag DEV
   inputs:
