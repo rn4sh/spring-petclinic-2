@@ -45,3 +45,8 @@ steps:
   inputs:
     openshiftService: 'ocp-aro'
     cmd: 'oc tag spring-petclinic-2:latest spring-petclinic-2:dev -n aro-ws'
+- task: oc-cmd@2
+  displayName: Rollout to DEV
+  inputs:
+    openshiftService: 'ocp-aro'
+    cmd: 'oc rollout latest dc/spring-petclinic-2 -n aro-ws'    
