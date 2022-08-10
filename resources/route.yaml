@@ -4,7 +4,7 @@ metadata:
   name: spring-petclinic
   namespace: aro-ws
 spec:
-  host: pc.nash.com
+  host:
   to:
     kind: Service
     name: spring-petclinic
